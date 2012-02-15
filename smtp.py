@@ -46,7 +46,7 @@ import re
 import email.utils
 import base64
 import hmac
-from diesel import Client
+from diesel import Client, ClientConnectionClosed
 from email.base64mime import encode as encode_base64
 from sys import stderr
 
