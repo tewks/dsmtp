@@ -771,17 +771,6 @@ class LMTP(SMTP):
         if host[0] != '/':
             return SMTP.connect(self, host, port)
 
-        # Handle Unix-domain sockets.
-        try:
-            self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-            self.sock.connect(host)
-        except socket.error, msg:
-            if self.debuglevel > 0:
-                print>>stderr, 'connect fail:', host
-            if self.sock:
-                self.sock.close()
-            self.sock = None
-            raise socket.error, msg
         (code, msg) = self.getreply()
         if self.debuglevel > 0:
             print>>stderr, "connect:", msg
