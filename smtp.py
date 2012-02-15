@@ -686,8 +686,10 @@ if __name__ == '__main__':
         msg = msg + line
     print "Message length is %d" % len(msg)
 
-    server = SMTP('localhost')
-    server.set_debuglevel(1)
-    server.sendmail(fromaddr, toaddrs, msg)
-    server.quit()
+    def do_it_live():
+        server = SMTP(host='localhost')
+        server.set_debuglevel(1)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
 
+    quickstart(do_it_live)
