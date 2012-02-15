@@ -289,19 +289,6 @@ class SMTP(Client):
         specified during instantiation.
 
         """
-        if not port and (host.find(':') == host.rfind(':')):
-            i = host.rfind(':')
-            if i >= 0:
-                host, port = host[:i], host[i + 1:]
-                try:
-                    port = int(port)
-                except ValueError:
-                    raise socket.error, "nonnumeric port"
-        if not port:
-            port = self.default_port
-        if self.debuglevel > 0:
-            print>>stderr, 'connect:', (host, port)
-        self.sock = self._get_socket(host, port, self.timeout)
         (code, msg) = self.getreply()
         if self.debuglevel > 0:
             print>>stderr, "connect:", msg
