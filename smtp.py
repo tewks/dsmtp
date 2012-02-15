@@ -194,7 +194,7 @@ else:
 
     _have_ssl = True
 
-class SMTP:
+class SMTP(Client):
     """This class manages a connection to an SMTP or ESMTP server.
     SMTP Objects:
         SMTP objects have the following attributes:
