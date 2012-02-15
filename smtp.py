@@ -313,7 +313,7 @@ class SMTP(Client):
             str = '%s%s' % (cmd, CRLF)
         else:
             str = '%s %s%s' % (cmd, args, CRLF)
-        self.send(str)
+        send(str)
 
     def getreply(self):
         """Get a reply from the server.
