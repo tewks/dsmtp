@@ -133,7 +133,6 @@ class SMTP(Client):
     ehlo_msg = "ehlo"
     ehlo_resp = None
     does_esmtp = 0
-    default_port = SMTP_PORT
 
     def __init__(self, host='', port=SMTP_PORT, local_hostname=None,
                  timeout=None, **kw):
