@@ -278,13 +278,6 @@ class SMTP(Client):
         """
         self.debuglevel = debuglevel
 
-    def _get_socket(self, port, host, timeout):
-        # This makes it simpler for SMTP_SSL to use the SMTP connect code
-        # and just alter the socket connection bit.
-        if self.debuglevel > 0:
-            print>>stderr, 'connect:', (host, port)
-        return socket.create_connection((port, host), timeout)
-
     def connect(self, host='localhost', port=0):
         """Connect to a host on a given port.
 
