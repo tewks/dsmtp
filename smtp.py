@@ -478,7 +478,7 @@ class SMTP(Client):
             if q[-2:] != CRLF:
                 q = q + CRLF
             q = q + "." + CRLF
-            self.send(q)
+            send(q)
             (code, msg) = self.getreply()
             if self.debuglevel > 0:
                 print>>stderr, "data:", (code, msg)
