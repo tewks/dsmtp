@@ -723,12 +723,10 @@ class SMTP_SSL(SMTP):
 
     default_port = SMTP_SSL_PORT
 
-    def __init__(self, host='', port=0, local_hostname=None,
-                 keyfile=None, certfile=None,
-                 timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
-        self.keyfile = keyfile
-        self.certfile = certfile
-        SMTP.__init__(self, host, port, local_hostname, timeout)
+    def __init__(self, *args, **kw):
+        kw['ssl_ctx'] = SSL.Context(SSL.SSLv23_METHOD)
+        SMTP.__init__(self, *args, **kw)
+
 
     def _get_socket(self, host, port, timeout):
         if self.debuglevel > 0:
