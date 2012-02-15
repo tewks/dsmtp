@@ -278,42 +278,6 @@ class SMTP(Client):
         """
         self.debuglevel = debuglevel
 
-    def _get_socket(self, port, host, timeout):
-        # This makes it simpler for SMTP_SSL to use the SMTP connect code
-        # and just alter the socket connection bit.
-        if self.debuglevel > 0:
-            print>>stderr, 'connect:', (host, port)
-        return socket.create_connection((port, host), timeout)
-
-    def connect(self, host='localhost', port=0):
-        """Connect to a host on a given port.
-
-        If the hostname ends with a colon (`:') followed by a number, and
-        there is no port specified, that suffix will be stripped off and the
-        number interpreted as the port number to use.
-
-        Note: This method is automatically invoked by __init__, if a host is
-        specified during instantiation.
-
-        """
-        if not port and (host.find(':') == host.rfind(':')):
-            i = host.rfind(':')
-            if i >= 0:
-                host, port = host[:i], host[i + 1:]
-                try:
-                    port = int(port)
-                except ValueError:
-                    raise socket.error, "nonnumeric port"
-        if not port:
-            port = self.default_port
-        if self.debuglevel > 0:
-            print>>stderr, 'connect:', (host, port)
-        self.sock = self._get_socket(host, port, self.timeout)
-        (code, msg) = self.getreply()
-        if self.debuglevel > 0:
-            print>>stderr, "connect:", msg
-        return (code, msg)
-
     def send(self, str):
         """Send `str' to the server."""
         if self.debuglevel > 0:
