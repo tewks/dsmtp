@@ -329,12 +329,10 @@ class SMTP(Client):
         Raises SMTPServerDisconnected if end-of-file is reached.
         """
         resp = []
-        if self.file is None:
-            self.file = self.sock.makefile('rb')
         while 1:
             try:
-                line = self.file.readline()
-            except socket.error as e:
+                line = until('\r\n') 
+            except ClientConnectionClosed as e:
                 self.close()
                 raise SMTPServerDisconnected("Connection unexpectedly closed: "
                                              + str(e))
