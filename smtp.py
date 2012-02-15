@@ -46,7 +46,7 @@ import re
 import email.utils
 import base64
 import hmac
-from diesel import Client, ClientConnectionClosed, quickstart, send, until
+from diesel import Client, ClientConnectionClosed, quickstart, send, until_eol
 from email.base64mime import encode as encode_base64
 from smtplib import SMTPException, SMTPServerDisconnected, SMTPResponseException, SMTPSenderRefused, SMTPRecipientsRefused, SMTPDataError, SMTPConnectError, SMTPHeloError, SMTPAuthenticationError     
 from sys import stderr
@@ -220,7 +220,7 @@ class SMTP(Client):
         resp = []
         while 1:
             try:
-                line = until('\r\n') 
+                line = until_eol() 
             except ClientConnectionClosed as e:
                 self.close()
                 raise SMTPServerDisconnected("Connection unexpectedly closed: "
