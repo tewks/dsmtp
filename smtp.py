@@ -294,19 +294,6 @@ class SMTP(Client):
             print>>stderr, "connect:", msg
         return (code, msg)
 
-    def send(self, str):
-        """Send `str' to the server."""
-        if self.debuglevel > 0:
-            print>>stderr, 'send:', repr(str)
-        if hasattr(self, 'sock') and self.sock:
-            try:
-                self.sock.sendall(str)
-            except socket.error:
-                self.close()
-                raise SMTPServerDisconnected('Server not connected')
-        else:
-            raise SMTPServerDisconnected('please run connect() first')
-
     def putcmd(self, cmd, args=""):
         """Send a command to the server."""
         if args == "":
