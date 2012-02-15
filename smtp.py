@@ -49,6 +49,7 @@ import hmac
 from diesel import Client, ClientConnectionClosed, send, until
 from email.base64mime import encode as encode_base64
 from sys import stderr
+from OpenSSL import SSL
 
 __all__ = ["SMTPException", "SMTPServerDisconnected", "SMTPResponseException",
            "SMTPSenderRefused", "SMTPRecipientsRefused", "SMTPDataError",
