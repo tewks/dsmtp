@@ -728,15 +728,6 @@ class SMTP_SSL(SMTP):
         SMTP.__init__(self, *args, **kw)
 
 
-    def _get_socket(self, host, port, timeout):
-        if self.debuglevel > 0:
-            print>>stderr, 'connect:', (host, port)
-        new_socket = socket.create_connection((host, port), timeout)
-        new_socket = ssl.wrap_socket(new_socket, self.keyfile, self.certfile)
-        self.file = SSLFakeFile(new_socket)
-        return new_socket
-
-
 #
 # LMTP extension
 #
