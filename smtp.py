@@ -625,7 +625,7 @@ class SMTP_SSL(SMTP):
 
     def __init__(self, port=SMTP_SSL_PORT, **kw):
         kw['ssl_ctx'] = SSL.Context(SSL.SSLv23_METHOD)
-        SMTP.__init__(self, *args, **kw)
+        SMTP.__init__(self, port=port,  **kw)
 
 
 #
