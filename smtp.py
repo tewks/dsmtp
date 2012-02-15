@@ -233,7 +233,7 @@ class SMTP(Client):
     default_port = SMTP_PORT
 
     def __init__(self, host='', port=0, local_hostname=None,
-                 timeout=None):
+                 timeout=None, **kw):
         """Initialize a new instance.
 
         If specified, `host' is the name of the remote host to which to
