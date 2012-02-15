@@ -624,9 +624,7 @@ class SMTP_SSL(SMTP):
     certificate chain file for the SSL connection.
     """
 
-    default_port = SMTP_SSL_PORT
-
-    def __init__(self, *args, **kw):
+    def __init__(self, *args, port=SMTP_SSL_PORT, **kw):
         kw['ssl_ctx'] = SSL.Context(SSL.SSLv23_METHOD)
         SMTP.__init__(self, *args, **kw)
 
