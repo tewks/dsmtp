@@ -719,16 +719,6 @@ class SMTP(Client):
         return senderrs
 
 
-    def close(self):
-        """Close the connection to the SMTP server."""
-        if self.file:
-            self.file.close()
-        self.file = None
-        if self.sock:
-            self.sock.close()
-        self.sock = None
-
-
     def quit(self):
         """Terminate the SMTP session."""
         res = self.docmd("quit")
