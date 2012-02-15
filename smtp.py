@@ -243,7 +243,8 @@ class SMTP(Client):
         the local hostname is found using socket.getfqdn().
 
         """
-        self.timeout = timeout
+        Client.__init__(host, port, **kw)
+
         self.esmtp_features = {}
         if host:
             (code, msg) = self.connect(host, port)
