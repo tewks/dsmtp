@@ -166,35 +166,6 @@ def quotedata(data):
     return re.sub(r'(?m)^\.', '..',
         re.sub(r'(?:\r\n|\n|\r(?!\n))', CRLF, data))
 
-
-try:
-    import ssl
-except ImportError:
-    _have_ssl = False
-else:
-    class SSLFakeFile:
-        """A fake file like object that really wraps a SSLObject.
-
-        It only supports what is needed in smtplib.
-        """
-        def __init__(self, sslobj):
-            self.sslobj = sslobj
-
-        def readline(self):
-            str = ""
-            chr = None
-            while chr != "\n":
-                chr = self.sslobj.read(1)
-                if not chr:
-                    break
-                str += chr
-            return str
-
-        def close(self):
-            pass
-
-    _have_ssl = True
-
 class SMTP(Client):
     """This class manages a connection to an SMTP or ESMTP server.
     SMTP Objects:
